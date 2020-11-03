@@ -1,8 +1,8 @@
 # ------------ Imports -------------------
 
 from tool import app, sk
-from flask import render_template, flash, url_for, request, jsonify
-import requests
+from flask import render_template, flash, url_for, request, jsonify, send_file
+import requests, csv
 
 # ----------------------------------------
 
@@ -25,6 +25,22 @@ def customers():
     else:
         flash("Something went wrong! "+ result)
         return render_template("customers.html", customers=[])
+
+@app.route("/csv", methods=["GET"])
+def download_csv():
+    url = sk.STORE_DOMAIN+"admin/api/2020-10/customers.json"
+    result = requests.get(url, auth=(sk.API_KEY, sk.API_PASSWORD))
+    if result.ok:
+        customers = result.json()["customers"]
+        with open("customers.csv", 'w', encoding='utf8', newline='') as f:
+            fc = csv.DictWriter(f, fieldnames=customers[0].keys())
+            fc.writeheader()
+            fc.writerows(customers)
+    else:
+        pass
+
+    return send_file("../customers.csv", mimetype='text/csv', attachment_filename="Customers.csv", as_attachment=True)
+
 
 # View and Edit customer details.
 @app.route("/customer", methods=["GET", "POST"])
