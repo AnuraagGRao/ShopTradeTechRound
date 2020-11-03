@@ -103,10 +103,11 @@ def apicustomer():
             payload = {
                 "customer":{
                     "id":data['customer_id'],
-                    "first_name":data["first_name"],
-                    "last_name":data["last_name"],
-                    "email":data["email"],
-                    "phone":data.get("phone")
+                    "first_name":data.get("first_name"),
+                    "last_name":data.get("last_name"),
+                    "email":data.get("email"),
+                    "phone":data.get("phone"),
+                    "tags":data.get("tags")
                 }
             }
             result = requests.put(url, auth=(sk.API_KEY, sk.API_PASSWORD), json=payload)
