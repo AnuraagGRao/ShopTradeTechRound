@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">ShopTrade</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="/home">Home</a>
+            <a class="nav-link" href="/customers">Customers <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/orders">Orders</a>
+          </div>
+        </div>
+      </nav>
+      {% with message = get_flashed_messages() %} {% if message %}
+        <ul>
+          <li class="bg-light">{{message}}</li>
+        </ul>
+        {% endif %} {% endwith %}
+    <div class="container">
+        <div class="card">
+            <form action="/customer" method="POST">
+                <div class="form-group">
+                    <center>ID - {{customer.id}}</center>
+                    <br>
+                    <input type="text" class="form-control" name="cid" id="cid" value="{{customer.id}}" style="display:none">
+                    <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" value="{{customer.first_name}}" aria-describedby="dfirst_name">
+                    <small id="dfirst_name" class="form-text text-muted">String</small>
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" value="{{customer.last_name}}" aria-describedby="dlast_name">
+                    <small id="dlast_name" class="form-text text-muted">String</small>
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" value="{{customer.email}}" aria-describedby="demail">
+                    <small id="demail" class="form-text text-muted">String</small>
+                    <label for="tags">Tags</label>
+                    <input type="text" class="form-control" name="tags" id="tags" value="{{customer.tags}}" aria-describedby="dtags">
+                    <small id="dtags" class="form-text text-muted">String, String, String ...</small>
+                    <center><button type="submit" class="btn w-50 btn-success">Submit</button></center>
+                  </div>  
+            </form>
+        </div>
+    </div>
+</body>
+</html>

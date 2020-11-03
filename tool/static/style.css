@@ -1,0 +1,9 @@
+html {
+    box-sizing: border-box;
+}
+
+#top, #bottom{
+    margin-top: 2vw;
+    height: auto;
+}
+
