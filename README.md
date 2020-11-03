@@ -20,3 +20,7 @@
 #### <Non required arguments>
 #### Output - {"customer":{//all customer details including id, email, etc}}
 
+### POST /api/orders (Creates a new order)
+
+#### Requires variant_id and variant_quantity.
+#### Output - {"order":{order details.}}
